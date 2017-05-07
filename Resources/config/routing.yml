@@ -1,0 +1,11 @@
+ticket_homepage:
+    path:     /ticket
+    defaults: { _controller: TicketBundle:Ticket:placeOrder }
+
+ticket_index:
+    path:     /ticket/index
+    defaults: { _controller: TicketBundle:Ticket:index }
+
+ticket_check_tickets:
+    path:     /ticket/check
+    defaults: { _controller: TicketBundle:Ticket:getTicketNumber }

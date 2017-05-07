@@ -1,0 +1,134 @@
+<?php
+
+namespace TicketBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TicketOrder
+ *
+ * @ORM\Table(name="ticket_order")
+ * @ORM\Entity(repositoryClass="TicketBundle\Repository\TicketOrderRepository")
+ */
+class TicketOrder
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="pesel", type="integer")
+     */
+    private $pesel;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="tickets_number", type="integer")
+     */
+    private $ticketsNumber;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return TicketOrder
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return TicketOrder
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set pesel
+     *
+     * @param integer $pesel
+     *
+     * @return TicketOrder
+     */
+    public function setPesel($pesel)
+    {
+        $this->pesel = $pesel;
+
+        return $this;
+    }
+
+    /**
+     * Get pesel
+     *
+     * @return int
+     */
+    public function getPesel()
+    {
+        return $this->pesel;
+    }
+}

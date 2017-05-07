@@ -1,0 +1,18 @@
+{% extends "TicketBundle:Ticket:base.html.twig" %}
+{% block content %}
+<!-- Map Section -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {{ form(form) }}
+            <div class="info"></div>
+        </div>
+    </div>
+</div>
+
+<input id="settings" type="hidden" data-url="{{path('ticket_check_tickets')}}">
+{% endblock %}
+{% block js %}
+    {{parent()}}
+    <script src="/bundles/ticket/js/validate.js" charset="utf-8"></script>
+{% endblock %}
