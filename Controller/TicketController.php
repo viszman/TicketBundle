@@ -18,17 +18,21 @@ class TicketController extends Controller
 
     public function placeOrderAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $canAdd = $em->getRepository('TicketBundle:TicketOrder')->canAddTickets(10, 0);
+        if ($canAdd) {
+            return $this->render('TicketBundle:Ticket:soldout.html.twig');
+        }
         $entity = new TicketOrder();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+
             $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('ticket_homepage'));
         }
-        // return $this->render('TicketBundle:Ticket:placeOrder.html.twig');
         return $this->render('TicketBundle:Ticket:placeOrder.html.twig', ['form' => $form->createView()]);
     }
 
