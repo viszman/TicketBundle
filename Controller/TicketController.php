@@ -19,10 +19,13 @@ class TicketController extends Controller
     public function placeOrderAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
+        //checking if tickets are sold out
         $canAdd = $em->getRepository('TicketBundle:TicketOrder')->canAddTickets(10, 0);
-        if ($canAdd) {
+        if (!$canAdd) {
             return $this->render('TicketBundle:Ticket:soldout.html.twig');
         }
+
         $entity = new TicketOrder();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -31,7 +34,7 @@ class TicketController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('ticket_homepage'));
+            return $this->redirect($this->generateUrl('ticket_thanks'));
         }
         return $this->render('TicketBundle:Ticket:placeOrder.html.twig', ['form' => $form->createView()]);
     }
@@ -64,5 +67,13 @@ class TicketController extends Controller
         $response = new JsonResponse();
 
         return $response->setData(['status' => $canAdd]);
+    }
+
+    /**
+     * showing thanks to user who buy tickets
+     */
+    public function thanksAction()
+    {
+        return $this->render('TicketBundle:Ticket:thanks.html.twig');
     }
 }

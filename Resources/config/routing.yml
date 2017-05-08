@@ -9,3 +9,7 @@ ticket_index:
 ticket_check_tickets:
     path:     /ticket/check
     defaults: { _controller: TicketBundle:Ticket:getTicketNumber }
+
+ticket_thanks:
+    path:     /ticket/thanks
+    defaults: { _controller: TicketBundle:Ticket:thanks }

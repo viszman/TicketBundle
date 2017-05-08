@@ -5,6 +5,7 @@ namespace TicketBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use TicketBundle\Validator\Pesel;
+use TicketBundle\Validator\Order;
 
 /**
  * TicketOrder
@@ -26,6 +27,9 @@ class TicketOrder
     /**
      * @var string
      * @Assert\NotBlank
+     * @Assert\Type("alpha",
+     *      message="Zła wartość, proszę podać tylko litery"
+     *)
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -41,6 +45,7 @@ class TicketOrder
     /**
      * @var string
      * @Pesel\Pesel
+     * @Order\Order
      * @ORM\Column(name="pesel", type="string", length=11)
      */
     private $pesel;

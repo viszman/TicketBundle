@@ -2,6 +2,7 @@
 
 namespace TicketBundle\Repository;
 
+use TicketBundle\Entity\TicketOrder;
 /**
  * TicketOrderRepository
  *
@@ -10,16 +11,9 @@ namespace TicketBundle\Repository;
  */
 class TicketOrderRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function canAddTickets($availableTickets, $ticket)
+    public function canAddTickets(int $availableTickets, int $ticket)
     {
-        $em = $this->getEntityManager();
-        $builder = $em->createQueryBuilder();
-        $builder
-            ->select('SUM(t.ticketsNumber) as ticketsNumber')
-            ->from('TicketBundle\Entity\TicketOrder', 't');
-
-        $query = $builder->getQuery();
-        $results = $query->getOneOrNullResult();
+        $results = $this->getSum();
         $good = true;
 
         if ($results['ticketsNumber'] + $ticket > $availableTickets) {
@@ -27,5 +21,32 @@ class TicketOrderRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $good;
+    }
+
+    public function canAddUser($pesel)
+    {
+        $result = $this->getSum($pesel);
+        if ($result['ticketsNumber'] >= 3) {
+            return false;
+        }
+        return true;
+    }
+
+    private function getSum($pesel = null)
+    {
+        $em = $this->getEntityManager();
+        $builder = $em->createQueryBuilder();
+        $builder
+            ->select('SUM(t.ticketsNumber) as ticketsNumber')
+            ->from('TicketBundle\Entity\TicketOrder', 't');
+
+        if ($pesel) {
+            $builder->where('t.pesel = :pesel')
+            ->setParameter('pesel', $pesel);
+        }
+
+        $query = $builder->getQuery();
+        $results = $query->getOneOrNullResult();
+        return $results;
     }
 }

@@ -17,7 +17,7 @@ class TicketOrderType extends AbstractType
             ->add('name', null, ['label' => 'ticket.name'])
             ->add('email', null, ['label' => 'ticket.email'])
             ->add('pesel', null, ['label' => 'ticket.pesel'])
-            ->add('ticketsNumber', null, ['label' => 'ticket.numer', 'attr' => ['step' => 1, 'max' => 3, 'min' => 0, 'class' => 'tickets-number']]);
+            ->add('ticketsNumber', null, ['label' => 'ticket.number', 'attr' => ['step' => 1, 'max' => 3, 'min' => 0, 'class' => 'tickets-number']]);
     }
 
     /**
