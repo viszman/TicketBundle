@@ -23,10 +23,10 @@ class TicketOrderRepository extends \Doctrine\ORM\EntityRepository
         return $good;
     }
 
-    public function canAddUser($pesel)
+    public function canAddUser($pesel, $ticketNumber)
     {
         $result = $this->getSum($pesel);
-        if ($result['ticketsNumber'] >= 3) {
+        if ($result['ticketsNumber'] + (int)$ticketNumber > 3) {
             return false;
         }
         return true;
@@ -47,6 +47,20 @@ class TicketOrderRepository extends \Doctrine\ORM\EntityRepository
 
         $query = $builder->getQuery();
         $results = $query->getOneOrNullResult();
+        return $results;
+    }
+
+    public function getAllUserInfo()
+    {
+        $em = $this->getEntityManager();
+        $builder = $em->createQueryBuilder();
+        $builder
+            ->select('t.name, t.email, t.pesel, sum(t.ticketsNumber) as number')
+            ->from('TicketBundle\Entity\TicketOrder', 't')
+            ->groupBy('t.pesel');
+
+        $query = $builder->getQuery();
+        $results = $query->getResult();
         return $results;
     }
 }

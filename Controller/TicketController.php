@@ -13,7 +13,11 @@ class TicketController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('TicketBundle:Ticket:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        //checking if tickets are sold out
+        $all = $em->getRepository('TicketBundle:TicketOrder')->getAllUserInfo();
+        return $this->render('TicketBundle:Ticket:index.html.twig', ['entities' => $all]);
     }
 
     public function placeOrderAction(Request $request)

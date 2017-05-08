@@ -1,1 +1,32 @@
 {% extends "TicketBundle:Ticket:base.html.twig" %}
+
+{% block content %}
+<!-- Map Section -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>{{'ticket.name'|trans}}</td>
+                        <td>{{'ticket.email'|trans}}</td>
+                        <td>{{'ticket.pesel'|trans}}</td>
+                        <td>{{'ticket.number'|trans}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in entities %}
+                    <tr>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.pesel}}</td>
+                        <td>{{user.number}}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

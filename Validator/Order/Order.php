@@ -11,7 +11,12 @@ class Order extends Constraint
     public $message = 'wykupiłes maksymalną liczbę biletow';
 
     public function validatedBy()
-  {
-      return 'ticket.order.validator';
-  }
+    {
+        return 'ticket.order.validator';
+    }
+
+    public function getTargets()
+    {
+        return self::CLASS_CONSTRAINT;
+    }
 }

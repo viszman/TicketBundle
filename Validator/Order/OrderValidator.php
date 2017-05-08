@@ -14,13 +14,14 @@ class OrderValidator extends ConstraintValidator
     private $em;
 
     public function __construct(EntityManager $entityManager)
-   {
-      $this->em = $entityManager;
-   }
-
-    public function validate($value, Constraint $constraint)
     {
-        $canAdd = $this->em->getRepository('TicketBundle:TicketOrder')->canAddUser($value);
+        $this->em = $entityManager;
+    }
+
+    public function validate($ticketOrder, Constraint $constraint)
+    {
+        $canAdd = $this->em->getRepository('TicketBundle:TicketOrder')
+            ->canAddUser($ticketOrder->getPesel(), $ticketOrder->getTicketsNumber());
         if (!$canAdd) {
             $this->context->buildViolation($constraint->message)
               ->addViolation();

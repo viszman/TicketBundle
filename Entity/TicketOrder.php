@@ -11,6 +11,7 @@ use TicketBundle\Validator\Order;
  * TicketOrder
  *
  * @ORM\Table(name="ticket_order")
+ * @Order\Order
  * @ORM\Entity(repositoryClass="TicketBundle\Repository\TicketOrderRepository")
  */
 class TicketOrder
@@ -45,7 +46,7 @@ class TicketOrder
     /**
      * @var string
      * @Pesel\Pesel
-     * @Order\Order
+     *
      * @ORM\Column(name="pesel", type="string", length=11)
      */
     private $pesel;

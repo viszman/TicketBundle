@@ -1,1 +1,6 @@
-ticket.thanks: __ticket.thanks
+ticket.thanks: 'Dziękujemy za złożenie zamowienia na bilet, zostanie on wyslany na maila podanego w kroku poprzednim'
+ticket.name: Imię
+ticket.email: Email
+ticket.pesel: PESEL
+ticket.number: 'Ilosć biletow (max 3)'
+ticket.place-order: 'Złoż zamowienie'
