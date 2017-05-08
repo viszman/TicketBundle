@@ -16,3 +16,5 @@ to add tickets visit
 localhost/ticket
 to check what was added visit
 localhost/ticket/index
+
+and install assets with command console assets:install
